@@ -1,0 +1,81 @@
+name: Vercel
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_CLI_VERSION: 50.28.0
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  preview:
+    name: Preview deploy
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: secrets
+        name: Check Vercel secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::notice::Skipping Vercel preview deploy because VERCEL_TOKEN, VERCEL_ORG_ID or VERCEL_PROJECT_ID is not configured."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - run: npm install --no-audit --no-fund
+        if: steps.secrets.outputs.configured == 'true'
+      - run: npx vercel@${VERCEL_CLI_VERSION} pull --yes --environment=preview --token="$VERCEL_TOKEN"
+        if: steps.secrets.outputs.configured == 'true'
+      - run: npx vercel@${VERCEL_CLI_VERSION} build --token="$VERCEL_TOKEN"
+        if: steps.secrets.outputs.configured == 'true'
+      - run: npx vercel@${VERCEL_CLI_VERSION} deploy --prebuilt --token="$VERCEL_TOKEN"
+        if: steps.secrets.outputs.configured == 'true'
+
+  production:
+    name: Production deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: secrets
+        name: Check Vercel secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::notice::Skipping Vercel production deploy because VERCEL_TOKEN, VERCEL_ORG_ID or VERCEL_PROJECT_ID is not configured."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - run: npm install --no-audit --no-fund
+        if: steps.secrets.outputs.configured == 'true'
+      - run: npx vercel@${VERCEL_CLI_VERSION} pull --yes --environment=production --token="$VERCEL_TOKEN"
+        if: steps.secrets.outputs.configured == 'true'
+      - run: npx vercel@${VERCEL_CLI_VERSION} build --prod --token="$VERCEL_TOKEN"
+        if: steps.secrets.outputs.configured == 'true'
+      - run: npx vercel@${VERCEL_CLI_VERSION} deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+        if: steps.secrets.outputs.configured == 'true'

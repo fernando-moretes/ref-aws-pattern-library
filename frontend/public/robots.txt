@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://patterns.moretes.com/sitemap.xml
