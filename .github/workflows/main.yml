@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: fernando-moretes/platform-workflows/.github/workflows/ci-node.yml@main
+    uses: fernando-moretes/platform-workflows/.github/workflows/ci-generic.yml@main
     with:
       runner: '["ubuntu-latest"]'
 
