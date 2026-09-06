@@ -4,7 +4,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ref-aws-pattern-library
-  description: A curated catalog of 22+ AWS reference architectures with diagrams, ADRs, Well-Architected pointers and cost notes.
+  description: "A curated catalog of 22+ AWS reference architectures with diagrams, ADRs, Well-Architected pointers and cost notes."
   annotations:
     github.com/project-slug: fernando-moretes/ref-aws-pattern-library
     backstage.io/source-location: url:https://github.com/fernando-moretes/ref-aws-pattern-library
@@ -17,7 +17,9 @@ metadata:
       title: SonarQube
     - url: https://defectdojo.home.lab/product?name=ref-aws-pattern-library
       title: DefectDojo
-  tags: [documentation, ci-node.yml]
+  # tags so aceitam [a-z0-9-]: ci-node.yml (ci-node.yml) tem ponto e reprovava
+  # todo componente na policy check do Backstage.
+  tags: [documentation, node]
 spec:
   type: documentation
   lifecycle: experimental
