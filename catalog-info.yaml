@@ -1,0 +1,25 @@
+# Gerado por fernando-moretes/platform. Não edite aqui: mude no orquestrador e
+# rode `make rollout`. É o que o Backstage (backstage.home.lab) lê deste repo.
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ref-aws-pattern-library
+  description: A curated catalog of 22+ AWS reference architectures with diagrams, ADRs, Well-Architected pointers and cost notes.
+  annotations:
+    github.com/project-slug: fernando-moretes/ref-aws-pattern-library
+    backstage.io/source-location: url:https://github.com/fernando-moretes/ref-aws-pattern-library
+    sonarqube.org/project-key: ref-aws-pattern-library
+  links:
+    - url: https://github.com/fernando-moretes/ref-aws-pattern-library/actions
+      title: Actions
+      icon: github
+    - url: https://sonarqube.home.lab/dashboard?id=ref-aws-pattern-library
+      title: SonarQube
+    - url: https://defectdojo.home.lab/product?name=ref-aws-pattern-library
+      title: DefectDojo
+  tags: [documentation, ci-node.yml]
+spec:
+  type: documentation
+  lifecycle: experimental
+  owner: group:plataforma
+  system: homelab
