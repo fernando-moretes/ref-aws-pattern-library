@@ -9,6 +9,8 @@ metadata:
     github.com/project-slug: fernando-moretes/ref-aws-pattern-library
     backstage.io/source-location: url:https://github.com/fernando-moretes/ref-aws-pattern-library
     sonarqube.org/project-key: ref-aws-pattern-library
+    # TechDocs: mkdocs.yml + docs/ do proprio repositorio (rolados pelo platform)
+    backstage.io/techdocs-ref: dir:.
   links:
     - url: https://github.com/fernando-moretes/ref-aws-pattern-library/actions
       title: Actions
