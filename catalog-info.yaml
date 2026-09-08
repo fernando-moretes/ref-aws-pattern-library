@@ -7,7 +7,9 @@ metadata:
   description: "A curated catalog of 22+ AWS reference architectures with diagrams, ADRs, Well-Architected pointers and cost notes."
   annotations:
     github.com/project-slug: fernando-moretes/ref-aws-pattern-library
-    backstage.io/source-location: url:https://github.com/fernando-moretes/ref-aws-pattern-library
+    # URL da arvore com barra final: e dela que o TechDocs resolve `dir:.`;
+    # sem a barra ele sobe um nivel e pede api.github.com/repos/<dono> (404).
+    backstage.io/source-location: url:https://github.com/fernando-moretes/ref-aws-pattern-library/tree/main/
     sonarqube.org/project-key: ref-aws-pattern-library
     # TechDocs: mkdocs.yml + docs/ do proprio repositorio (rolados pelo platform)
     backstage.io/techdocs-ref: dir:.
