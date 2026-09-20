@@ -20,6 +20,7 @@ jobs:
     uses: fernando-moretes/platform-workflows/.github/workflows/ci-node.yml@main
     with:
       runner: '["ubuntu-latest"]'
+      testes: "bloqueia"
 
 # A varredura de seguranca NAO roda em PR, e sai cara se voltar sem pensar: ela
 # pede `security-events: write` para subir SARIF ao code scanning, e PR do
