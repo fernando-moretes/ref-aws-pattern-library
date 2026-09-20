@@ -15,6 +15,7 @@ jobs:
     uses: fernando-moretes/platform-workflows/.github/workflows/ci-node.yml@main
     with:
       runner: '["ubuntu-latest"]'
+      testes: "bloqueia"
 
   seguranca:
     # O chamador precisa conceder o que o workflow chamado pede: um reusable
