@@ -16,7 +16,7 @@
     "mermaid": "^11.4.0"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@tailwindcss/postcss": "^4.1.9",
