@@ -36,6 +36,9 @@ jobs:
   # Documentacao: mkdocs (TechDocs) e OpenAPI. Report-only: aparece no
   # relatorio, nao reprova.
   docs:
+    # Bump de dependencia nao muda documentacao: pular aqui poupa um job por
+    # PR do dependabot no runner do homelab.
+    if: github.actor != 'dependabot[bot]'
     uses: fernando-moretes/platform-workflows/.github/workflows/docs.yml@main
     with:
       runner: '["ubuntu-latest"]'
